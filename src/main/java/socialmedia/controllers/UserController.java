@@ -19,8 +19,8 @@ public class UserController {
 	private UserServiceImpl userService;
 	
 	@GetMapping("/users/{userName}/timeline")
-	public List<Message> getUserStory(@PathVariable String user) {
-		return userService.getUserTimelineByUserName(user);
+	public List<Message> getUserStory(@PathVariable String userName) {
+		return userService.getUserTimelineByUserName(userName);
 	}
 	
 }

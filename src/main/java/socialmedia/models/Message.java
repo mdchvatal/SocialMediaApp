@@ -31,7 +31,7 @@ public class Message {
 	private Date date;
 	
 	public Message() {
-		
+		this.setDate(new Date());
 	}
 	
 	public Message(String message) {
