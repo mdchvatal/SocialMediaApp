@@ -2,11 +2,30 @@ package socialmedia.models;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 public class User {
-	private ArrayList<Message> timeline = new ArrayList<>();
-	private ArrayList<User> followers = new ArrayList<>();
-	private ArrayList<Message> userStory = new ArrayList<>();
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	@Column(name = "timeline")
+	private ArrayList<Message> timeline;
+	
+	@Column(name = "followers")
+	private ArrayList<User> followers;
+	
+	@Column(name = "userStory")
+	private ArrayList<Message> userStory;
+	
+	@Column(name = "userName")
 	private String userName;
+	
+	public User() {
+	}
 	
 	public User(String username) {
 		this.userName = username;
@@ -52,6 +71,14 @@ public class User {
 	private void addFollower(User user) {
 		this.followers.add(user);
 		
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	public String getUserName() {

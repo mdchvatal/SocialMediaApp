@@ -2,10 +2,26 @@ package socialmedia.models;
 
 import java.util.Date;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Message {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	@JsonIgnore
 	private User user;
 	private String message;
 	private Date date;
+	
+	public Message() {
+		
+	}
 	
 	public Message(String message) {
 		this.setMessage(message);
@@ -16,6 +32,14 @@ public class Message {
 		this.setMessage(message);
 		this.user = user;
 		this.setDate(new Date());
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public User getUser() {
