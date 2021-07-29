@@ -1,25 +1,30 @@
 package socialmedia.models;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+@Entity
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Integer id;
 	
-	@Column(name = "timeline")
-	private ArrayList<Message> timeline;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Message> timeline;
 	
-	@Column(name = "followers")
-	private ArrayList<User> followers;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<User> followers;
 	
-	@Column(name = "userStory")
-	private ArrayList<Message> userStory;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Message> userStory;
 	
 	@Column(name = "userName")
 	private String userName;
@@ -89,24 +94,28 @@ public class User {
 		this.userName = userName;
 	}
 
-	public ArrayList<Message> getTimeline() {
+	public List<Message> getTimeline() {
 		return timeline;
 	}
-	public void setTimeline(ArrayList<Message> timeline) {
+
+	public void setTimeline(List<Message> timeline) {
 		this.timeline = timeline;
 	}
-	public ArrayList<User> getFollowers() {
+
+	public List<User> getFollowers() {
 		return followers;
 	}
-	public void setFollowers(ArrayList<User> followers) {
+
+	public void setFollowers(List<User> followers) {
 		this.followers = followers;
 	}
-	public ArrayList<Message> getUserStory() {
+
+	public List<Message> getUserStory() {
 		return userStory;
 	}
-	public void setUserStory(ArrayList<Message> userStory) {
+
+	public void setUserStory(List<Message> userStory) {
 		this.userStory = userStory;
 	}
-	
-	
 }
+	

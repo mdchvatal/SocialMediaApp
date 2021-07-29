@@ -1,6 +1,7 @@
 package socialmedia.controllers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,7 @@ public class UserController {
 	private UserServiceImpl userService;
 	
 	@GetMapping("/users/{userName}/timeline")
-	public ArrayList<Message> getUserStory(@PathVariable String user) {
+	public List<Message> getUserStory(@PathVariable String user) {
 		return userService.getUserTimelineByUserName(user);
 	}
 	
