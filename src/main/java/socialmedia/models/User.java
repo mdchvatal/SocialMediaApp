@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 	@Id
@@ -19,15 +21,18 @@ public class User {
 	private Integer id;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	@JsonIgnore
 	private List<Message> timeline;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<User> followers;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	@JsonIgnore
 	private List<Message> userStory;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	@JsonIgnore
 	private List<Comment> comments;
 	
 	@Column(name = "userName")

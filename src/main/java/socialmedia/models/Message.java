@@ -26,7 +26,6 @@ public class Message {
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "message_user_id", referencedColumnName = "id")
-	@JsonIgnore
 	private User user;
 	
 	private String message;
