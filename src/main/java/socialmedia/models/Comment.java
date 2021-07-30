@@ -21,7 +21,6 @@ public class Comment {
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "comment_user_id", referencedColumnName = "id")
-	@JsonIgnore
 	private User user;
 	
 	private Date date;
