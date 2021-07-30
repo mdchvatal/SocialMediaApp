@@ -27,6 +27,9 @@ public class User {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Message> userStory;
 	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Comment> comments;
+	
 	@Column(name = "userName")
 	private String userName;
 	
@@ -117,6 +120,14 @@ public class User {
 
 	public void setUserStory(List<Message> userStory) {
 		this.userStory = userStory;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 }
 	

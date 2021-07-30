@@ -1,6 +1,7 @@
 package socialmedia.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,7 +30,11 @@ public class Message {
 	private User user;
 	
 	private String message;
+	
 	private Date date;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "message")
+	private List<Comment> comments;
 	
 	public Message() {
 		this.setDate(new Date());
@@ -75,6 +81,14 @@ public class Message {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 }
