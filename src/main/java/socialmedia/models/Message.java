@@ -17,6 +17,20 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * 
+ * @author matt
+ * 
+ * Concrete Message class. Is the primary class for holding typed data a user wishes to publish to their story and, if they have followers, 
+ * to their followers. 
+ * 
+ * Aside from their primary purpose of holding typed messsages, Message objects keep track of the user who produced it, the date it 
+ * was produced, and a List of "Comments"
+ * 
+ * See "Comment" class for details.
+ *
+ */
+
 @Entity
 public class Message {
 	

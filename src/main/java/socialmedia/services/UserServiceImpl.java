@@ -10,6 +10,17 @@ import socialmedia.models.Message;
 import socialmedia.models.User;
 import socialmedia.repositories.UserRepository;
 
+/**
+ * 
+ * @author matt
+ *
+ *This class, known within SPing applications as a "Service" class, is responsible for housing the business logic of the application
+ *as it pertains to Users and their exposed APIs. Any needed repository is injected into the class as an instance variable created
+ *by the Spring Boot application through the "Autowired" annotation. Repositories are all interfaces. Spring Boot surmises a concrete 
+ *implementation and implements it automatically. 
+ *
+ */
+
 @Service
 public class UserServiceImpl {
 	@Autowired

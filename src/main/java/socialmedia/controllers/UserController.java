@@ -19,7 +19,7 @@ public class UserController {
 	@Autowired
 	private UserServiceImpl userService;
 	
-	@CrossOrigin(origins = "http://localhost:8080")
+	//Takes a user name as a path variable, returns a List (in Java) or array (when parsed to JSON on client side) of Message objects
 	@GetMapping("/users/{userName}/timeline")
 	public List<Message> getUserStory(@PathVariable String userName) {
 		return userService.getUserTimelineByUserName(userName);

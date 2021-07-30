@@ -13,6 +13,16 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * 
+ * @author matt
+ *
+ *Like Message objects, "Comments" are primarily responsible for holding typed data. They are produced by a user and can track the producing 
+ *User, the date it is produced, and the Message object to which the comment itself is meant to be a response. 
+ *
+ *Comments do not refer to other comments, only the primary Message object. 
+ */
+
 @Entity
 public class Comment {
 	@Id

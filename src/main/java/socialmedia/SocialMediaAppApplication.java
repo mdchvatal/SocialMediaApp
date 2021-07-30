@@ -13,6 +13,7 @@ public class SocialMediaAppApplication {
 		SpringApplication.run(SocialMediaAppApplication.class, args);
 	}
 	
+	//Shuts off CORS checking for temporary development purposes
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {

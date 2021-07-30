@@ -12,7 +12,19 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+/**
+ * 
+ * @author matt
+ * 
+ *Basic User concrete class. Acts as model for holding "Story" as a List of Message objects. The story will contain all the aggregated 
+ *message objects from the user itslef. ALso contains "Timeline" - an aggregation of all the stories of users in "Followers" list and 
+ *from story in user itself. 
+ *
+ *Can "Follow" other users (which adds user itself to followed user's list of followers).
+ *
+ *Whenever the user published a message to their story, all followers are automatically "updated", which pushes the message to the follower's 
+ *timeline automatically.
+ */
 @Entity
 public class User {
 	@Id
