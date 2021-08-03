@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import socialmedia.models.Message;
 import socialmedia.models.User;
+import socialmedia.repositories.MessageRepository;
 import socialmedia.repositories.UserRepository;
 
 /**
@@ -26,8 +27,19 @@ public class UserServiceImpl {
 	@Autowired
 	private UserRepository userRepo;
 	
+	@Autowired
+	private MessageRepository messageRepo;
+	
 	public List<Message> getUserTimelineByUserName(String userName) {
 		User tempUser = userRepo.findByUserName(userName);
-		return tempUser.getTimeline();
+		return messageRepo.findAllByUser(tempUser);
+	}
+	
+	public Message postMessageToTimelineByUsername(String userName, Message message) {
+		User tempUser = userRepo.findByUserName(userName);
+		message.setUser(tempUser);
+		messageRepo.save(message);
+		tempUser.postMessage(message);
+		return message;
 	}
 }

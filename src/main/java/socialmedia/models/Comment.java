@@ -3,6 +3,7 @@ package socialmedia.models;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Comment {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "comment_id")
 	private Integer id;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -36,7 +38,7 @@ public class Comment {
 	private Date date;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "message_id", referencedColumnName = "id")
+	@JoinColumn(name = "message_id", referencedColumnName = "message_id")
 	@JsonIgnore
 	private Message message;
 	

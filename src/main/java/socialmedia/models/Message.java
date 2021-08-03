@@ -1,5 +1,7 @@
 package socialmedia.models;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +16,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
@@ -35,33 +39,35 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Message {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@Column(name = "message_id")
 	private Integer id;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "message_user_id", referencedColumnName = "id")
+	@JoinColumn(name = "message_user_id")
 	private User user;
 	
 	private String message;
 	
-	private Date date;
+	@JsonFormat(pattern="hh:mm dd/MM")
+	private LocalDateTime date;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "message")
 	private List<Comment> comments;
 	
 	public Message() {
-		this.setDate(new Date());
+		this.setDate(LocalDateTime.now());
 	}
 	
 	public Message(String message) {
 		this.setMessage(message);
-		this.setDate(new Date());
+		this.setDate(LocalDateTime.now());
 	}
 	
 	public Message(String message, User user) {
 		this.setMessage(message);
 		this.user = user;
-		this.setDate(new Date());
+		this.setDate(LocalDateTime.now());
 	}
 
 	public Integer getId() {
@@ -88,12 +94,12 @@ public class Message {
 		this.message = message;
 	}
 
-	public Date getDate() {
+	public LocalDateTime getDate() {
 		return this.date;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDate(LocalDateTime localDateTime) {
+		this.date = localDateTime;
 	}
 
 	public List<Comment> getComments() {
