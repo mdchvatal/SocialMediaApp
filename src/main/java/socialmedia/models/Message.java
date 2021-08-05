@@ -52,6 +52,8 @@ public class Message {
 	@ManyToMany(mappedBy = "likedMessages", cascade = CascadeType.ALL)
 	private Set<User> likes;
 	
+	private int numberOfLikes;
+	
 	private String message;
 	
 	@JsonFormat(pattern="hh:mm dd/MM")
@@ -59,6 +61,8 @@ public class Message {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "message")
 	private List<Comment> comments;
+	
+	private int numberOfComments;
 	
 	public Message() {
 		this.setDate(LocalDateTime.now());
@@ -121,6 +125,39 @@ public class Message {
 
 	public void setLikes(Set<User> likeUsers) {
 		this.likes = likeUsers;
+	}
+
+	public int getNumberOfLikes() {
+		if (this.getLikes() == null) {
+			return 0;
+		} else {
+		return this.getLikes().size();
+		}
+	}
+
+	public void setNumberOfLikes(int numberOfLikes) {
+		this.numberOfLikes = numberOfLikes;
+	}
+
+	public int getNumberOfComments() {
+		if (this.getComments() == null) {
+			return 0;
+		} else
+		return this.getComments().size();
+	}
+
+	public void setNumberOfComments(int numberOfComments) {
+		this.numberOfComments = numberOfComments;
+	}
+	
+	public void addComment(Comment comment) {
+		this.comments.add(comment);
+		this.setNumberOfComments(this.getNumberOfComments());
+	}
+	
+	public void addLike(User user) {
+		this.likes.add(user);
+		this.setNumberOfLikes(getNumberOfLikes());
 	}
 
 }

@@ -1,6 +1,7 @@
 package socialmedia.models;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -56,7 +57,7 @@ public class User {
 			  joinColumns = @JoinColumn(name = "user_id"), 
 			  inverseJoinColumns = @JoinColumn(name = "message_id"))
 	@JsonIgnore
-	private List<Message> likedMessages;
+	private Set<Message> likedMessages;
 	
 	@Column(name = "userName")
 	private String userName;
@@ -158,11 +159,11 @@ public class User {
 		this.comments = comments;
 	}
 
-	public List<Message> getLikedMessages() {
+	public Set<Message> getLikedMessages() {
 		return likedMessages;
 	}
 
-	public void setLikedMessages(List<Message> likedMessages) {
+	public void setLikedMessages(Set<Message> likedMessages) {
 		this.likedMessages = likedMessages;
 	}
 }
