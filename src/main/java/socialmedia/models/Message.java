@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -46,6 +48,9 @@ public class Message {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "message_user_id")
 	private User user;
+	
+	@ManyToMany(mappedBy = "likedMessages", cascade = CascadeType.ALL)
+	private Set<User> likes;
 	
 	private String message;
 	
@@ -108,6 +113,14 @@ public class Message {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public Set<User> getLikes() {
+		return likes;
+	}
+
+	public void setLikes(Set<User> likeUsers) {
+		this.likes = likeUsers;
 	}
 
 }

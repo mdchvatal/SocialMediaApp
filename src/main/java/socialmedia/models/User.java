@@ -9,6 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -46,6 +49,14 @@ public class User {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	@JsonIgnore
 	private List<Comment> comments;
+	
+	@ManyToMany
+	@JoinTable(
+			  name = "message_likes", 
+			  joinColumns = @JoinColumn(name = "user_id"), 
+			  inverseJoinColumns = @JoinColumn(name = "message_id"))
+	@JsonIgnore
+	private List<Message> likedMessages;
 	
 	@Column(name = "userName")
 	private String userName;
@@ -145,6 +156,14 @@ public class User {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public List<Message> getLikedMessages() {
+		return likedMessages;
+	}
+
+	public void setLikedMessages(List<Message> likedMessages) {
+		this.likedMessages = likedMessages;
 	}
 }
 	
