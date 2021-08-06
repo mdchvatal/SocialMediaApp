@@ -32,13 +32,13 @@ public class Comment {
 	private Integer id;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "comment_user_id", referencedColumnName = "id")
+	@JoinColumn(name = "comment_user_id", referencedColumnName = "user_id")
 	private User user;
 	
 	private Date date;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "message_id", referencedColumnName = "message_id")
+	@JoinColumn(name = "message_message_id", referencedColumnName = "message_id")
 	@JsonIgnore
 	private Message message;
 	
@@ -78,6 +78,14 @@ public class Comment {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public Message getMessage() {
+		return message;
+	}
+
+	public void setMessage(Message message) {
+		this.message = message;
 	}
 	
 	

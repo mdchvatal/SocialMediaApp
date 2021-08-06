@@ -2,6 +2,7 @@ package socialmedia.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,9 +22,13 @@ public class UserController {
 	@Autowired
 	private UserServiceImpl userService;
 	
-	//Takes a user name as a path variable, returns a List (in Java) or array (when parsed to JSON on client side) of Message objects
+	/**Takes a user name as a path variable, returns a List (in Java) or array (when parsed to JSON on client side) of Message objects
+	 * 
+	 * @param userName
+	 * @return
+	 */
 	@GetMapping("/users/{userName}/timeline")
-	public List<Message> getUserStory(@PathVariable String userName) {
+	public Set<Message> getUserTimeline(@PathVariable String userName) {
 		return userService.getUserTimelineByUserName(userName);
 	}
 	
@@ -40,4 +45,10 @@ public class UserController {
 	public Message postUserMessageToTimeline(@PathVariable String userName, @RequestBody Message message) {
 		return userService.postMessageToTimelineByUsername(userName, message);
 	}
+	
+	@PostMapping("/users/{userName}/follow")
+	public User followUserByUsername(@PathVariable String userName, @RequestBody String userToFollow) {
+		return userService.followUserByUserName(userName, userToFollow);
+	}
+	
 }

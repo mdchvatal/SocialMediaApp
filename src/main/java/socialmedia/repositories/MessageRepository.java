@@ -9,7 +9,7 @@ import socialmedia.models.User;
 
 public interface MessageRepository extends CrudRepository<Message, Integer> {
 	
-	public List<Message> findAllByUser(User user);
+	public List<Message> findAllByPostingUser(User user);
 	
-	public List<Message> findAllByUserUserName(String userName);
+	public List<Message> findAllByPostingUserUserName(String userName);
 }

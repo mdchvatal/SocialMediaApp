@@ -1,5 +1,4 @@
 package socialmedia.models;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Set;
 
@@ -14,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
@@ -33,19 +33,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "user_id")
 	private Integer id;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	@JsonIgnore
-	private List<Message> timeline;
-	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "timeline_id", referencedColumnName = "timeline_id")
+	private Timeline timeline;
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<User> followers;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	@JsonIgnore
-	private List<Message> userStory;
+	private Set<User> followers;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	@JsonIgnore
@@ -69,31 +66,13 @@ public class User {
 		this.userName = username;
 	}
 	
-	public void displayStory() {
-		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
-		System.out.println("----  Your Story ----");
-		for (Message message : getUserStory()) {
-			System.out.println(message.getMessage() + " -- " + formatter.format(message.getDate()));
-		}
-	}
-	
-	public void displayTimeline() {
-		SimpleDateFormat formatter = new SimpleDateFormat("hh:mm MM-dd-yyyy");
-		System.out.println("---- Your Timeline ----");
-		for (Message message : getTimeline()) {
-			System.out.println(message.getMessage() + " -- " + 
-					message.getUser().getUserName() + " " + formatter.format(message.getDate()));
-		}
-	}
-	
 	public void postMessage(Message message) {
-		userStory.add(message);
-		timeline.add(message);
-		this.update(message);
+		this.getTimeline().addMessage(message);
+		update(message);
 	}
 	
-	private void addMessageToTimeline(Message message) {
-		this.timeline.add(message);
+	public void addMessageToTimeline(Message message) {
+		this.getTimeline().addMessage(message);
 	}
 	
 	public void update(Message message) {
@@ -106,9 +85,8 @@ public class User {
 		user.addFollower(this);
 	}
 	
-	private void addFollower(User user) {
-		this.followers.add(user);
-		
+	public void addFollower(User user) {
+		followers.add(user);
 	}
 	
 	public Integer getId() {
@@ -127,28 +105,12 @@ public class User {
 		this.userName = userName;
 	}
 
-	public List<Message> getTimeline() {
-		return timeline;
-	}
-
-	public void setTimeline(List<Message> timeline) {
-		this.timeline = timeline;
-	}
-
-	public List<User> getFollowers() {
+	public Set<User> getFollowers() {
 		return followers;
 	}
 
-	public void setFollowers(List<User> followers) {
+	public void setFollowers(Set<User> followers) {
 		this.followers = followers;
-	}
-
-	public List<Message> getUserStory() {
-		return userStory;
-	}
-
-	public void setUserStory(List<Message> userStory) {
-		this.userStory = userStory;
 	}
 
 	public List<Comment> getComments() {
@@ -165,6 +127,14 @@ public class User {
 
 	public void setLikedMessages(Set<Message> likedMessages) {
 		this.likedMessages = likedMessages;
+	}
+	
+	public void setTimeline(Timeline timeline) {
+		this.timeline = timeline;
+	}
+	
+	public Timeline getTimeline() {
+		return timeline;
 	}
 }
 	

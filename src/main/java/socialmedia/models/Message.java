@@ -3,6 +3,7 @@ package socialmedia.models;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -14,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -45,9 +47,12 @@ public class Message {
 	@Column(name = "message_id")
 	private Integer id;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "message_user_id")
-	private User user;
+	@ManyToOne
+	private User postingUser;
+	
+	@ManyToMany(mappedBy = "timelineMessages")
+	@JsonIgnore
+	private Set<Timeline> timelines;
 	
 	@ManyToMany(mappedBy = "likedMessages", cascade = CascadeType.ALL)
 	private Set<User> likes;
@@ -66,6 +71,7 @@ public class Message {
 	
 	public Message() {
 		this.setDate(LocalDateTime.now());
+		this.timelines = new HashSet<Timeline>();
 	}
 	
 	public Message(String message) {
@@ -75,8 +81,28 @@ public class Message {
 	
 	public Message(String message, User user) {
 		this.setMessage(message);
-		this.user = user;
+		this.postingUser = user;
 		this.setDate(LocalDateTime.now());
+	}
+	
+	public void addTimeline(Timeline timeline) {
+		timelines.add(timeline);
+	}
+
+	public User getPostingUser() {
+		return postingUser;
+	}
+
+	public void setPostingUser(User postingUser) {
+		this.postingUser = postingUser;
+	}
+
+	public Set<Timeline> getTimeline() {
+		return timelines;
+	}
+
+	public void setTimelines(Set<Timeline> timelines) {
+		this.timelines = timelines;
 	}
 
 	public Integer getId() {
@@ -85,14 +111,6 @@ public class Message {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public User getUser() {
-		return this.user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	public String getMessage() {
@@ -123,7 +141,7 @@ public class Message {
 		return likes;
 	}
 
-	public void setLikes(Set<User> likeUsers) {
+	public void setLikes(HashSet<User> likeUsers) {
 		this.likes = likeUsers;
 	}
 
