@@ -38,6 +38,7 @@ public class User {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "timeline_id", referencedColumnName = "timeline_id")
+	@JsonIgnore
 	private Timeline timeline;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -58,6 +59,9 @@ public class User {
 	
 	@Column(name = "userName")
 	private String userName;
+	
+	@Column(name = "name")
+	private String name;
 	
 	public User() {
 	}
@@ -135,6 +139,14 @@ public class User {
 	
 	public Timeline getTimeline() {
 		return timeline;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }
 	

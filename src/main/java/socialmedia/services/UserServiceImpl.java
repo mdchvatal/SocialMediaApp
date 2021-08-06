@@ -38,7 +38,8 @@ public class UserServiceImpl {
 	
 	
 	public Set<Message> getUserTimelineByUserName(String userName) {
-		return timelineRepo.findByUserUserName(userName).getTimelineMessages();
+		User tempUser = userRepo.findByUserName(userName);
+		return tempUser.getTimeline().getTimelineMessages();
 	}
 	
 	public Message postMessageToTimelineByUsername(String userName, Message message) {
@@ -48,6 +49,7 @@ public class UserServiceImpl {
 		message.addTimeline(tempUser.getTimeline());
 		messageRepo.save(message);
 		tempUser.postMessage(message);
+		userRepo.save(tempUser);
 		return message;
 	}
 

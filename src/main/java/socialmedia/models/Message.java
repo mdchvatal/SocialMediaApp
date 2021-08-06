@@ -55,6 +55,7 @@ public class Message {
 	private Set<Timeline> timelines;
 	
 	@ManyToMany(mappedBy = "likedMessages", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<User> likes;
 	
 	private int numberOfLikes;

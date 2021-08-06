@@ -24,7 +24,6 @@ public class Timeline {
 	private int id;
 	
 	@OneToOne(mappedBy="timeline")
-	@JsonIgnore
 	private User user;
 	
 	@ManyToMany
