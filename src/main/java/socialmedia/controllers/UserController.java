@@ -48,6 +48,7 @@ public class UserController {
 	
 	@PostMapping("/users/{userName}/follow")
 	public User followUserByUsername(@PathVariable String userName, @RequestBody String userToFollow) {
+		System.out.println(userToFollow);
 		return userService.followUserByUserName(userName, userToFollow);
 	}
 	

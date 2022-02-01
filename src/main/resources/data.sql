@@ -8,10 +8,10 @@ INSERT INTO message (date, message, posting_user_user_id, number_of_likes, numbe
 INSERT INTO message (date, message, posting_user_user_id, number_of_likes, number_of_comments) VALUES (now(), 'So wonderful, Indeed', 2, 0, 0);
 INSERT INTO message (date, message, posting_user_user_id, number_of_likes, number_of_comments) VALUES (now(), 'I can hardly believe my eyes', 1, 0, 0);
 INSERT INTO message (date, message, posting_user_user_id, number_of_likes, number_of_comments) VALUES (now(), 'If only Papa could see me now', 1, 0, 0);
-INSERT INTO message (date, message, posting_user_user_id, number_of_likes, number_of_comments) VALUES (now(), 'Isn\'t everything so WONDERFUL?!', 1, 0, 0);
-INSERT INTO message (date, message, posting_user_user_id, number_of_likes, number_of_comments) VALUES (now(), 'So wonderful, Indeed', 2, 0, 0);
-INSERT INTO message (date, message, posting_user_user_id, number_of_likes, number_of_comments) VALUES (now(), 'I can hardly believe my  eyes', 1, 0, 0);
-INSERT INTO message (date, message, posting_user_user_id, number_of_likes, number_of_comments) VALUES (now(), 'If only Papa could see me now', 1, 0, 0);
+INSERT INTO message (date, message, posting_user_user_id, number_of_likes, number_of_comments) VALUES (now(), 'What da heq?!', 1, 0, 0);
+INSERT INTO message (date, message, posting_user_user_id, number_of_likes, number_of_comments) VALUES (now(), 'Man, that\'s cool', 2, 0, 0);
+INSERT INTO message (date, message, posting_user_user_id, number_of_likes, number_of_comments) VALUES (now(), 'I do not believe in Santa Claus', 1, 0, 0);
+INSERT INTO message (date, message, posting_user_user_id, number_of_likes, number_of_comments) VALUES (now(), 'Ribbit Ribbit', 1, 0, 0);
 
 INSERT INTO timeline_messages (timeline_id, message_id) VALUES (1, 1);
 INSERT INTO timeline_messages (timeline_id, message_id) VALUES (2, 2);

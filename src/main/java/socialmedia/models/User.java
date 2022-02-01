@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @author matt
  * 
  *Basic User concrete class. Acts as model for holding "Story" as a List of Message objects. The story will contain all the aggregated 
- *message objects from the user itslef. ALso contains "Timeline" - an aggregation of all the stories of users in "Followers" list and 
+ *message objects from the user itslef. Also contains "Timeline" - an aggregation of all the stories of users in "Followers" list and 
  *from story in user itself. 
  *
  *Can "Follow" other users (which adds user itself to followed user's list of followers).
